@@ -1,0 +1,39 @@
+--server:
+    port: 8181
+info:
+    app:
+        description: Sample application
+        name: Judge repository application
+        version: 1.0.0
+logging:
+    level:
+        blog: WARN
+        org: WARN
+        org.hibernate.SQL: DEBUG
+management:
+    endpoint:
+        health:
+            show-details: always
+    endpoints:
+        web:
+            exposure:
+                include: info, health, httptrace, metrics, threaddump, heapdump, shutdown,
+                    beans
+    trace:
+        http:
+            enabled: true
+spring:
+    datasource:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        password: *****!
+        url: jdbc:mysql://localhost:3306/Judge?createDatabaseIfNotExist=true&amp
+        username: root
+    jpa:
+        hibernate:
+            ddl-auto: update
+            dialect: org.hibernate.dialect.MySQL8Dialect
+            format_sql: true
+            show_sql: true
+            use_sql_comments: true
+    main:
+        allow-bean-definition-overriding: true
