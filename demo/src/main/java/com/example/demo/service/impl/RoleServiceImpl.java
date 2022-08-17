@@ -1,9 +1,11 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.entity.Role;
-import com.example.demo.model.entity.RoleNameEnum;
+import com.example.demo.model.entity.RoleEntity;
+import com.example.demo.model.entity.enumeration.RoleName;
+import com.example.demo.model.service.RoleServiceModel;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.service.RoleService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,28 +13,26 @@ import java.util.Arrays;
 
 @Service
 public class RoleServiceImpl implements RoleService {
-
     private final RoleRepository roleRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public RoleServiceImpl(RoleRepository roleRepository) {
+    public RoleServiceImpl(RoleRepository roleRepository, ModelMapper modelMapper) {
         this.roleRepository = roleRepository;
+        this.modelMapper = modelMapper;
     }
 
 
     @Override
     public void initRoles() {
         if (roleRepository.count() == 0) {
-            roleRepository.saveAll(Arrays.stream(RoleNameEnum.values()).map(Role::new).toList());
-
-
+            Arrays.stream(RoleName.values())
+                    .forEach(r -> roleRepository.save(new RoleEntity(r)));
         }
-
     }
 
     @Override
-    public Role findRole(RoleNameEnum roleNameEnum) {
-        return roleRepository.findByName(roleNameEnum).orElse(null);
-
+    public RoleServiceModel findByName(RoleName name) {
+        return modelMapper.map(roleRepository.findByName(name), RoleServiceModel.class);
     }
 }

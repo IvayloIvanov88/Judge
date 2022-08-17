@@ -1,15 +1,11 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.entity.Role;
-import com.example.demo.model.entity.RoleNameEnum;
+import com.example.demo.model.entity.RoleEntity;
+import com.example.demo.model.entity.enumeration.RoleName;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface RoleRepository extends JpaRepository<Role,Long> {
-
-    Optional<Role>findByName(RoleNameEnum roleNameEnum);
-
+public interface RoleRepository extends JpaRepository<RoleEntity, String> {
+    RoleEntity findByName(RoleName name);
 }

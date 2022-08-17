@@ -7,9 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DatabaseInit implements CommandLineRunner {
-
     private final RoleService roleService;
-
 
     @Autowired
     public DatabaseInit(RoleService roleService) {
@@ -20,6 +18,5 @@ public class DatabaseInit implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         roleService.initRoles();
-
     }
 }
