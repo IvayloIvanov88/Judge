@@ -28,7 +28,7 @@ public class UserRegisterBindingModel {
     @Email(message = "Invalid email")
     private String email;
 
-    @Pattern(regexp = "https:\\\\/\\\\/github\\\\.com\\\\/.+", message = "Enter a valid github address ")
+//    @Pattern(regexp = "https:\\\\/\\\\/github\\\\.com\\\\/.+", message = "Enter a valid github address ")
     @NotBlank(message = "Must not be blank")
     private String githubAddress;
 }
