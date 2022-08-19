@@ -10,9 +10,14 @@ import java.util.List;
 public interface UserService {
     void register(UserServiceModel userServiceModel);
     void login(UserServiceModel userServiceModel);
-    UserServiceModel findByUsernameAndPassword(UserServiceModel userServiceModel);
+
+    void loginUser(String userName);
+
+    UserServiceModel findByUsername(UserServiceModel userServiceModel);
 
     void logout();
+
+    boolean authenticate(String userName, String password);
 
     List<String> findAllUsernames();
 

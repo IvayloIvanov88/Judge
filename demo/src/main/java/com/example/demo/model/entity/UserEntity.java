@@ -3,10 +3,10 @@ package com.example.demo.model.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -17,11 +17,11 @@ import java.util.Set;
 public class UserEntity extends BaseEntity {
 
     @Column(name = "username", nullable = false, unique = true)
-    @Length(min = 2, message = "The username must be at least 2 characters long")
+    @Size(min = 2, message = "The username must be at least 2 characters long")
     private String username;
 
     @Column(name = "password", nullable = false)
-    @Length(min = 3, message = "The password must be at least 3 characters long")
+    @Size(min = 3, message = "The password must be at least 3 characters long")
     private String password;
 
     @Column(name = "email", nullable = false, unique = true)

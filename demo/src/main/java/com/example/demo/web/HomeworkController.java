@@ -45,19 +45,13 @@ public class HomeworkController {
     }
 
     @PostMapping("/add")
-    private String addConfirm(
-            @Valid HomeworkAddBindingModel homeworkAddBindingModel
-            , BindingResult bindingResult
+    private String addConfirm(@Valid HomeworkAddBindingModel homeworkAddBindingModel, BindingResult bindingResult
             , RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("homeworkAddBindingModel"
-                    , homeworkAddBindingModel);
-
-            redirectAttributes
-                    .addFlashAttribute("org.springframework" +
-                                    ".validation.BindingResult.homeworkAddBindingModel",
-                            homeworkAddBindingModel);
+            redirectAttributes.addFlashAttribute("homeworkAddBindingModel", homeworkAddBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.homeworkAddBindingModel",
+                    bindingResult);
 
             return "redirect:add";
         }
@@ -66,16 +60,11 @@ public class HomeworkController {
         boolean isLate = exerciseService.checkIfIsLate(homeworkAddBindingModel.getExercise());
 
         if (isLate) {
-            redirectAttributes.addFlashAttribute("homeworkAddBindingModel"
-                    , homeworkAddBindingModel);
-
-            redirectAttributes.addFlashAttribute("isLate"
-                    , true);
+            redirectAttributes.addFlashAttribute("homeworkAddBindingModel", homeworkAddBindingModel);
+            redirectAttributes.addFlashAttribute("isLate", true);
         }
 
-        homeworkService
-                .addHomework(homeworkAddBindingModel.getExercise()
-                        , homeworkAddBindingModel.getGithubAddress());
+        homeworkService.addHomework(homeworkAddBindingModel.getExercise(), homeworkAddBindingModel.getGithubAddress());
 
         return "redirect:/";
 

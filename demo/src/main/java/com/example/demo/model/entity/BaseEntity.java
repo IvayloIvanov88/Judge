@@ -1,7 +1,6 @@
 package com.example.demo.model.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.GeneratedValue;
@@ -9,8 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-@Getter
-@Setter
+@Data
 public abstract class BaseEntity {
     @Id
     @GeneratedValue(generator = "uuid-string")

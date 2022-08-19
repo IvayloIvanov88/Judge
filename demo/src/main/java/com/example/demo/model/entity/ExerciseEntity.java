@@ -3,7 +3,6 @@ package com.example.demo.model.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
@@ -11,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 public class ExerciseEntity extends BaseEntity {
 
     @Column(name = "name", nullable = false, unique = true)
-    @Length(min = 2, message = "The name must be at least 2 characters")
+    @Size(min = 2, message = "The name must be at least 2 characters")
     private String name;
 
     @Column(name = "started_on", nullable = false)

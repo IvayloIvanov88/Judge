@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class HomeworkServiceModel {
+
     private String id;
     private LocalDateTime addedOn;
     private String githubAddress;

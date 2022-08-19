@@ -13,6 +13,7 @@ import javax.validation.constraints.Pattern;
 @Setter
 @NoArgsConstructor
 public class UserServiceModel extends BaseServiceModel {
+
     @NotBlank(message = "Must not be blank")
     @Length(min = 2, message = "The username must be at least 2 characters long")
     private String username;
@@ -27,7 +28,7 @@ public class UserServiceModel extends BaseServiceModel {
     @Email(message = "Invalid email")
     private String email;
 
-    @Pattern(regexp = "https://github.com/\\w+/", message = "Enter a valid github address")
+//    @Pattern(regexp = "https://github.com/\\w+/", message = "Enter a valid GitHub address")
     @NotBlank(message = "Must not be blank")
     private String githubAddress;
 

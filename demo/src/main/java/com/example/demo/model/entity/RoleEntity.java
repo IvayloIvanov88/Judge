@@ -18,6 +18,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoleEntity extends BaseEntity {
+
     @Enumerated(EnumType.STRING)
     private RoleName name;
 }

@@ -51,8 +51,7 @@ public class ExerciseController {
     }
 
     @PostMapping("/add")
-    private String addConfirm(
-            @Valid ExerciseAddBindingModel exerciseAddBindingModel
+    private String addConfirm(@Valid ExerciseAddBindingModel exerciseAddBindingModel
             , BindingResult bindingResult
             , RedirectAttributes redirectAttributes) {
 
@@ -70,8 +69,7 @@ public class ExerciseController {
             return "redirect:add";
         }
 
-        exerciseService
-                .add(modelMapper.map(exerciseAddBindingModel, ExerciseServiceModel.class));
+        exerciseService.add(modelMapper.map(exerciseAddBindingModel, ExerciseServiceModel.class));
 
         return "redirect:/";
     }

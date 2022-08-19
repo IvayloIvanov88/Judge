@@ -13,6 +13,6 @@ import javax.validation.constraints.Pattern;
 public class HomeworkAddBindingModel {
     private String exercise;
 
-    @Pattern(regexp = "https://github.com/\\w+/\\w+/")
+//    @Pattern(regexp = "https://github.com/\\w+/\\w+/")
     private String githubAddress;
 }

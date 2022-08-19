@@ -29,15 +29,13 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public List<String> findAllExerciseNames() {
-        return
-                exerciseRepository
-                        .findAllExerciseNames();
+
+        return exerciseRepository.findAllExerciseNames();
     }
 
     @Override
     public boolean checkIfIsLate(String exercise) {
         ExerciseEntity exerciseEntity = findByName(exercise);
-
 
         return exerciseEntity != null
                 && exerciseEntity.getDueDate().isBefore(LocalDateTime.now());

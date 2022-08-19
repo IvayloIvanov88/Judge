@@ -77,9 +77,7 @@ public class UserController {
             return "redirect:register";
         }
 
-        userService.register(modelMapper
-                .map(userRegisterBindingModel
-                        , UserServiceModel.class));
+        userService.register(modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
 
         return "redirect:login";
     }
@@ -98,36 +96,25 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    private String loginConfirm(
-            @Valid UserLoginBindingModel userLoginBindingModel
-            , BindingResult bindingResult
-            , RedirectAttributes redirectAttributes
-    ) {
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("userLoginBindingModel"
-                    , userLoginBindingModel);
+    private String loginConfirm(@Valid UserLoginBindingModel userLoginBindingModel, BindingResult bindingResult
+            , RedirectAttributes redirectAttributes) {
 
-            redirectAttributes.addFlashAttribute("org.springframework" +
-                            ".validation.BindingResult" +
-                            ".userLoginBindingModel",
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel",
                     bindingResult);
 
             return "redirect:login";
         }
+        if (userService.authenticate(userLoginBindingModel.getUsername(), userLoginBindingModel.getPassword())) {
+            userService.loginUser(userLoginBindingModel.getUsername());
+            return "redirect:/";
+        } else {
+            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
+            redirectAttributes.addFlashAttribute("notFoundMsg", "Incorrect username or password");
 
-        UserServiceModel userServiceModel =
-                userService.findByUsernameAndPassword(
-                        modelMapper.map(userLoginBindingModel, UserServiceModel.class));
-
-        if (userServiceModel == null) {
-            redirectAttributes.addFlashAttribute("notFound", true);
-            redirectAttributes
-                    .addFlashAttribute("notFoundMsg", "Incorrect username or password");
-            return "redirect:login";
+            return "redirect:/users/login";
         }
-
-        userService.login(userServiceModel);
-        return "redirect:/";
     }
 
     @GetMapping("/logout")
